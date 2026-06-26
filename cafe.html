@@ -1,103 +1,157 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<link rel="stylesheet" type="text/css" href=" estilo_cafe.css ">
-<meta charset="#E1BEE7">
-<title>Café Starbucks</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="teste.css">
+    <title>Starbucks Roxo • Peça Agora</title>
 </head>
 <body>
-<h1 class="titulo">Café starbucks</h1>
-<img src="Starbucks3.jpg" width="195" height="170" border="3">
-<img src="Starbucks4.jpg" width="195" height="170" border="3">
-<img src="Starbucks1.jpg" width="195" height="170" border="3">
-<img src="Starbucks5.jpg" width="195" height="170" border="3">
-<h1>Bebidas do Café starbucks</h1>
-<h2>Honeydukes Bursting Bonbons Frappuccin , R$25,00</h2>
-<p>Edição limitada Harry Potter (2026). Bebida cremosa roxa com sabores doces (baunilha, caramelo ou bergamota/honeydukes), chantilly no domo e toppings mágicos. O copo muda de cor ou tem temática. Sabor doce, divertido e visualmente incrível. </p>
-<h2>Blueberry Crème, R$22,50</h2>
 
-<p>Mesma linha da primeira: base cremosa batida com lavanda + baunilha, leite e gelo, finalizada com bastante chantilly. Sabor floral, doce e refrescante — perfeito para dias quentes. </p>
+    <!-- MENU SUPERIOR -->
+    <nav class="menu-topo">
+        <div class="logo">☕ Starbucks Roxo</div>
+        <div class="menu-links">
+            <a href="#" onclick="scrollToSection('bebidas')">Bebidas</a>
+            <a href="#" onclick="scrollToSection('bolos')">Bolos</a>
+            <a href="#" onclick="mostrarCarrinho()">Carrinho (<span id="cart-count">0</span>)</a>
+        </div>
+    </nav>
 
-<h2>Berry Crème Frappuccino, R$22,00</h2>
+    <header class="hero">
+        <h1>Café Starbucks</h1>
+        <p>Faça seu pedido online </p>
+    </header>
 
-<p>Bebida cremosa batida com gelo, leite, xarope de baunilha e pó/sabor de lavanda (ou blueberry). Topada com espuma de leite ou chantilly e berries. Tem um sabor floral suave + doce, bem cremoso e refrescante. </p>
-
-<h2>Triple Berry Frappuccino, R$23,00</h2>
-
-<p>Versão mais densa com purê de blueberry/blackberry, leite, gelo e chantilly. Toppings de berries ou crumble por cima. Sabor bem frutado de frutas vermelhas/roxas, cremoso e quase como um smoothie. </p>
-<h1>Bolos do Café starbucks</h1>
-<h2>Pedaço bolo Muffin de Blueberry, R$12,90</h2>
-
-<p>Muffin macio com pedaços de blueberry (mirtilo), toque de limão e cobertura crocante de açúcar. Tem um visual mais claro, mas com frutinhas roxas dentro. </p>
- 
-<!-- Botão WhatsApp -->
-<a href="https://wa.me/5542998194925?text=Olá!%20Quero%20fazer%20um%20pedido" target="_blank" class="btn-whatsapp">
-    📱 Pedir pelo WhatsApp
-</a>
-
-<!-- Modal do Carrinho -->
-<div id="modal-carrinho" class="modal">
-    <div class="modal-content">
-        <h2>Seu Carrinho</h2>
-        <div id="itens-carrinho"></div>
-        <h3>Total: R$ <span id="total-preco">0.00</span></h3>
-        <button onclick="fecharCarrinho()" class="btn-fechar">Fechar</button>
-        <button onclick="finalizarPedido()" class="btn-finalizar">Finalizar Pedido</button>
+    <!-- Galeria de Imagens -->
+    <div class="galeria">
+        <img src="cafeharry.jpg" alt="Starbucks">
+        <img src="cafe1.jpg" alt="Starbucks">
+        <img src="cafe2.jpg" alt="Starbucks">
+        <img src="973de791f51f5729ece27659a7abc02a.jpg" alt="Starbucks">
     </div>
-</div>
 
-<footer>
-    <p>© 2026 Café Starbucks Roxo • Todos os direitos reservados</p>
-</footer>
+    <section id="bebidas" class="secao">
+        <h2 class="titulo-secao">Bebidas Especiais</h2>
+        
+        <div class="produto">
+            <h3>Honeydukes Bursting Bonbons Frappuccino <span class="preco">R$ 25,00</span></h3>
+            <p>Edição limitada Harry Potter • Cremosa roxa com toppings mágicos</p>
+            <button onclick="adicionarAoCarrinho('Honeydukes Bursting Bonbons Frappuccino', 25.00)" class="btn-adicionar">🛒 Adicionar</button>
+        </div>
 
-<script>
-    let carrinho = [];
+        <div class="produto">
+            <h3>Blueberry Crème Frappuccino <span class="preco">R$ 22,50</span></h3>
+            <p>Cremoso com lavanda, baunilha e chantilly</p>
+            <button onclick="adicionarAoCarrinho('Blueberry Crème Frappuccino', 22.50)" class="btn-adicionar">🛒 Adicionar</button>
+        </div>
 
-    function adicionarAoCarrinho(nome, preco) {
-        carrinho.push({nome, preco});
-        atualizarCarrinho();
-        alert(`${nome} adicionado ao carrinho! 💜`);
-    }
+        <div class="produto">
+            <h3>Berry Crème Frappuccino <span class="preco">R$ 22,00</span></h3>
+            <p>Com berries frescas e sabor floral</p>
+            <button onclick="adicionarAoCarrinho('Berry Crème Frappuccino', 22.00)" class="btn-adicionar">🛒 Adicionar</button>
+        </div>
 
-    function atualizarCarrinho() {
-        document.getElementById('cart-count').textContent = carrinho.length;
-    }
+        <div class="produto">
+            <h3>Triple Berry Frappuccino <span class="preco">R$ 23,00</span></h3>
+            <p>Purê de frutas vermelhas + chantilly</p>
+            <button onclick="adicionarAoCarrinho('Triple Berry Frappuccino', 23.00)" class="btn-adicionar">🛒 Adicionar</button>
+        </div>
+    </section>
 
-    function mostrarCarrinho() {
-        const modal = document.getElementById('modal-carrinho');
-        const itensDiv = document.getElementById('itens-carrinho');
-        let html = '';
-        let total = 0;
+    <section id="bolos" class="secao">
+        <h2 class="titulo-secao">Bolos & Doces</h2>
+        
+        <div class="produto">
+            <h3>Muffin de Blueberry <span class="preco">R$ 12,90</span></h3>
+            <p>Macio com mirtilos e cobertura crocante</p>
+            <button onclick="adicionarAoCarrinho('Muffin de Blueberry', 12.90)" class="btn-adicionar">🛒 Adicionar</button>
+        </div>
+    </section>
 
-        carrinho.forEach((item, index) => {
-            html += `<p>${item.nome} - R$ ${item.preco.toFixed(2)} 
-            <button onclick="removerItem(${index})" style="color:red;">X</button></p>`;
-            total += item.preco;
-        });
+    <!-- Modal do Carrinho -->
+    <div id="modal-carrinho" class="modal">
+        <div class="modal-content">
+            <h2>🛒 Seu Carrinho</h2>
+            <div id="itens-carrinho"></div>
+            <h3>Total: R$ <span id="total-preco">0.00</span></h3>
+            <div class="modal-buttons">
+                <button onclick="fecharCarrinho()" class="btn-fechar">Fechar</button>
+                <button onclick="finalizarPedido()" class="btn-finalizar">Finalizar Pedido</button>
+            </div>
+        </div>
+    </div>
 
-        itensDiv.innerHTML = html || '<p>Carrinho vazio</p>';
-        document.getElementById('total-preco').textContent = total.toFixed(2);
-        modal.style.display = 'flex';
-    }
+    <!-- WhatsApp Fixo -->
+    <a href="https://wa.me/5542998194925?text=Olá!%20Quero%20fazer%20um%20pedido" target="_blank" class="btn-whatsapp">
+        📱 Pedir pelo WhatsApp
+    </a>
 
-    function removerItem(index) {
-        carrinho.splice(index, 1);
-        mostrarCarrinho();
-        atualizarCarrinho();
-    }
+    <footer>
+        <p>© 2026 Café Starbucks Roxo • Todos os direitos reservados</p>
+        <p>Feito com muito profissionalismo</p>
+    </footer>
 
-    function fecharCarrinho() {
-        document.getElementById('modal-carrinho').style.display = 'none';
-    }
+    <script>
+        let carrinho = [];
 
-    function finalizarPedido() {
-        if (carrinho.length === 0) return alert("Carrinho vazio!");
-        alert("Pedido enviado com sucesso! 💜 Em breve entraremos em contato.");
-        carrinho = [];
-        fecharCarrinho();
-        atualizarCarrinho();
-    }
-</script>
+        function adicionarAoCarrinho(nome, preco) {
+            carrinho.push({nome, preco});
+            atualizarCarrinho();
+            
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.textContent = `${nome} adicionado! `;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 2000);
+        }
 
+        function atualizarCarrinho() {
+            document.getElementById('cart-count').textContent = carrinho.length;
+        }
+
+        function mostrarCarrinho() {
+            const modal = document.getElementById('modal-carrinho');
+            const itensDiv = document.getElementById('itens-carrinho');
+            let html = '';
+            let total = 0;
+
+            carrinho.forEach((item, index) => {
+                html += `
+                    <div class="item-carrinho">
+                        <span>${item.nome}</span>
+                        <span>R$ ${item.preco.toFixed(2)}</span>
+                        <button onclick="removerItem(${index})" class="btn-remover">X</button>
+                    </div>`;
+                total += item.preco;
+            });
+
+            itensDiv.innerHTML = html || '<p class="empty">Seu carrinho está vazio </p>';
+            document.getElementById('total-preco').textContent = total.toFixed(2);
+            modal.style.display = 'flex';
+        }
+
+        function removerItem(index) {
+            carrinho.splice(index, 1);
+            mostrarCarrinho();
+            atualizarCarrinho();
+        }
+
+        function fecharCarrinho() {
+            document.getElementById('modal-carrinho').style.display = 'none';
+        }
+
+        function finalizarPedido() {
+            if (carrinho.length === 0) return alert("Carrinho vazio!");
+            alert("✅ Pedido enviado com sucesso! Entraremos em contato pelo WhatsApp ");
+            carrinho = [];
+            fecharCarrinho();
+            atualizarCarrinho();
+        }
+
+        function scrollToSection(section) {
+            document.getElementById(section).scrollIntoView({ behavior: "smooth" });
+        }
+    </script>
 </body>
 </html>
