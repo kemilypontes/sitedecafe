@@ -1,157 +1,191 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="teste.css">
-    <title>Starbucks Roxo • Peça Agora</title>
-</head>
-<body>
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-    <!-- MENU SUPERIOR -->
-    <nav class="menu-topo">
-        <div class="logo">☕ Starbucks Roxo</div>
-        <div class="menu-links">
-            <a href="#" onclick="scrollToSection('bebidas')">Bebidas</a>
-            <a href="#" onclick="scrollToSection('bolos')">Bolos</a>
-            <a href="#" onclick="mostrarCarrinho()">Carrinho (<span id="cart-count">0</span>)</a>
-        </div>
-    </nav>
+body {
+    background-color: #f4e9f7;
+    font-family: 'Segoe UI', sans-serif;
+    color: #2c2c2c;
+}
 
-    <header class="hero">
-        <h1>Café Starbucks</h1>
-        <p>Faça seu pedido online </p>
-    </header>
+/* MENU TOPO */
+.menu-topo {
+    background: linear-gradient(135deg, #6f0988, #450470);
+    color: white;
+    padding: 15px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
 
-    <!-- Galeria de Imagens -->
-    <div class="galeria">
-        <img src="cafeharry.jpg" alt="Starbucks">
-        <img src="cafe1.jpg" alt="Starbucks">
-        <img src="cafe2.jpg" alt="Starbucks">
-        <img src="973de791f51f5729ece27659a7abc02a.jpg" alt="Starbucks">
-    </div>
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
 
-    <section id="bebidas" class="secao">
-        <h2 class="titulo-secao">Bebidas Especiais</h2>
-        
-        <div class="produto">
-            <h3>Honeydukes Bursting Bonbons Frappuccino <span class="preco">R$ 25,00</span></h3>
-            <p>Edição limitada Harry Potter • Cremosa roxa com toppings mágicos</p>
-            <button onclick="adicionarAoCarrinho('Honeydukes Bursting Bonbons Frappuccino', 25.00)" class="btn-adicionar">🛒 Adicionar</button>
-        </div>
+.menu-links a {
+    color: white;
+    margin-left: 20px;
+    text-decoration: none;
+    font-weight: 500;
+}
 
-        <div class="produto">
-            <h3>Blueberry Crème Frappuccino <span class="preco">R$ 22,50</span></h3>
-            <p>Cremoso com lavanda, baunilha e chantilly</p>
-            <button onclick="adicionarAoCarrinho('Blueberry Crème Frappuccino', 22.50)" class="btn-adicionar">🛒 Adicionar</button>
-        </div>
+.menu-links a:hover {
+    text-decoration: underline;
+}
 
-        <div class="produto">
-            <h3>Berry Crème Frappuccino <span class="preco">R$ 22,00</span></h3>
-            <p>Com berries frescas e sabor floral</p>
-            <button onclick="adicionarAoCarrinho('Berry Crème Frappuccino', 22.00)" class="btn-adicionar">🛒 Adicionar</button>
-        </div>
+/* Hero */
+.hero {
+    text-align: center;
+    padding: 40px 20px;
+    background: linear-gradient(to bottom, #dcc6eb, #f4e9f7);
+}
 
-        <div class="produto">
-            <h3>Triple Berry Frappuccino <span class="preco">R$ 23,00</span></h3>
-            <p>Purê de frutas vermelhas + chantilly</p>
-            <button onclick="adicionarAoCarrinho('Triple Berry Frappuccino', 23.00)" class="btn-adicionar">🛒 Adicionar</button>
-        </div>
-    </section>
+.hero h1 {
+    color: #41025a;
+    font-size: 38px;
+}
 
-    <section id="bolos" class="secao">
-        <h2 class="titulo-secao">Bolos & Doces</h2>
-        
-        <div class="produto">
-            <h3>Muffin de Blueberry <span class="preco">R$ 12,90</span></h3>
-            <p>Macio com mirtilos e cobertura crocante</p>
-            <button onclick="adicionarAoCarrinho('Muffin de Blueberry', 12.90)" class="btn-adicionar">🛒 Adicionar</button>
-        </div>
-    </section>
+/* Galeria */
+.galeria {
+    text-align: center;
+    margin: 20px 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+}
 
-    <!-- Modal do Carrinho -->
-    <div id="modal-carrinho" class="modal">
-        <div class="modal-content">
-            <h2>🛒 Seu Carrinho</h2>
-            <div id="itens-carrinho"></div>
-            <h3>Total: R$ <span id="total-preco">0.00</span></h3>
-            <div class="modal-buttons">
-                <button onclick="fecharCarrinho()" class="btn-fechar">Fechar</button>
-                <button onclick="finalizarPedido()" class="btn-finalizar">Finalizar Pedido</button>
-            </div>
-        </div>
-    </div>
+.galeria img {
+    width: 195px;
+    height: 170px;
+    object-fit: cover;
+    border: 5px solid #450470;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+}
 
-    <!-- WhatsApp Fixo -->
-    <a href="https://wa.me/5542998194925?text=Olá!%20Quero%20fazer%20um%20pedido" target="_blank" class="btn-whatsapp">
-        📱 Pedir pelo WhatsApp
-    </a>
+/* Seções */
+.secao {
+    padding: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+}
 
-    <footer>
-        <p>© 2026 Café Starbucks Roxo • Todos os direitos reservados</p>
-        <p>Feito com muito profissionalismo</p>
-    </footer>
+.titulo-secao {
+    color: #720a9b;
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 28px;
+    text-shadow: 2px 2px 4px white;
+}
 
-    <script>
-        let carrinho = [];
+.produto {
+    background: white;
+    padding: 18px;
+    margin: 15px auto;
+    border-radius: 16px;
+    box-shadow: 0 6px 15px rgba(111, 9, 136, 0.15);
+    border: 3px solid #a45ec2;
+    transition: 0.3s;
+}
 
-        function adicionarAoCarrinho(nome, preco) {
-            carrinho.push({nome, preco});
-            atualizarCarrinho();
-            
-            const toast = document.createElement('div');
-            toast.className = 'toast';
-            toast.textContent = `${nome} adicionado! `;
-            document.body.appendChild(toast);
-            setTimeout(() => toast.remove(), 2000);
-        }
+.produto:hover {
+    transform: translateY(-6px);
+}
 
-        function atualizarCarrinho() {
-            document.getElementById('cart-count').textContent = carrinho.length;
-        }
+.produto h3 {
+    color: #720a9b;
+    margin-bottom: 6px;
+}
 
-        function mostrarCarrinho() {
-            const modal = document.getElementById('modal-carrinho');
-            const itensDiv = document.getElementById('itens-carrinho');
-            let html = '';
-            let total = 0;
+.preco {
+    float: right;
+    color: #450470;
+    font-weight: bold;
+    font-size: 18px;
+}
 
-            carrinho.forEach((item, index) => {
-                html += `
-                    <div class="item-carrinho">
-                        <span>${item.nome}</span>
-                        <span>R$ ${item.preco.toFixed(2)}</span>
-                        <button onclick="removerItem(${index})" class="btn-remover">X</button>
-                    </div>`;
-                total += item.preco;
-            });
+.btn-adicionar {
+    background: #6f0988;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 50px;
+    cursor: pointer;
+    margin-top: 10px;
+    font-weight: bold;
+}
 
-            itensDiv.innerHTML = html || '<p class="empty">Seu carrinho está vazio </p>';
-            document.getElementById('total-preco').textContent = total.toFixed(2);
-            modal.style.display = 'flex';
-        }
+.btn-adicionar:hover {
+    background: #8c2eb3;
+}
 
-        function removerItem(index) {
-            carrinho.splice(index, 1);
-            mostrarCarrinho();
-            atualizarCarrinho();
-        }
+/* Modal, Toast, WhatsApp, Footer... (mantive o resto igual) */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.7);
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+}
 
-        function fecharCarrinho() {
-            document.getElementById('modal-carrinho').style.display = 'none';
-        }
+.modal-content {
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 500px;
+    border: 5px solid #6f0988;
+}
 
-        function finalizarPedido() {
-            if (carrinho.length === 0) return alert("Carrinho vazio!");
-            alert("✅ Pedido enviado com sucesso! Entraremos em contato pelo WhatsApp ");
-            carrinho = [];
-            fecharCarrinho();
-            atualizarCarrinho();
-        }
+.item-carrinho {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #ddd;
+}
 
-        function scrollToSection(section) {
-            document.getElementById(section).scrollIntoView({ behavior: "smooth" });
-        }
-    </script>
-</body>
-</html>
+.btn-remover { background: #ff4444; color: white; border: none; padding: 5px 12px; border-radius: 50%; cursor: pointer; }
+
+.toast {
+    position: fixed;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #6f0988;
+    color: white;
+    padding: 14px 25px;
+    border-radius: 50px;
+    z-index: 3000;
+    animation: fadeInOut 1.8s forwards;
+}
+
+@keyframes fadeInOut { 0%{opacity:0} 10%{opacity:1} 90%{opacity:1} 100%{opacity:0} }
+
+.btn-whatsapp {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #25D366;
+    color: white;
+    padding: 14px 20px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    z-index: 1000;
+}
+
+footer {
+    text-align: center;
+    padding: 30px 20px;
+    background: #450470;
+    color: white;
+    margin-top: 50px;
+}
