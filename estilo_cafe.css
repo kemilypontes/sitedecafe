@@ -1,47 +1,157 @@
-body{
-    background-color: #dcc6eb;
-    margin-left: 20%;
-    margin-right: 20%;
-    border: 4px dotted rgb(98, 8, 121);
-    padding: 10px 10px 10px 10px;
-    font-family: sans-serif;
-    }
-    h1.titulo{
-    
-    color: #41025a;
-    font-family: verdana;
-    text-shadow: 4px 4px 4px white;
-    font-size: 30pt;
-    text-align: center;
-    }
-    h1{
-    color: #720a9b;
-    font-family: verdana;
-    text-shadow: 2px 2px 2px rgb(255, 255, 255)
-    }
-    h2{
-    color:#720a9b;
-    text-shadow: 2px 2px 2px rgb(255, 255, 255)
-    }
-    img{
-    border: 4px solid #450470;
-    object-fit: cover;
-    transform: translateX(50%);
-    }
-    
-    p{ color: rgb(1, 10, 12); }
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="teste.css">
+    <title>Starbucks Roxo • Peça Agora</title>
+</head>
+<body>
 
-    /* WhatsApp Button */
-.btn-whatsapp {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: #6f0988;
-    color: white;
-    padding: 14px 20px;
-    border-radius: 50px;
-    text-decoration: none;
-    font-weight: bold;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    z-index: 1000;
-}
+    <!-- MENU SUPERIOR -->
+    <nav class="menu-topo">
+        <div class="logo">☕ Starbucks Roxo</div>
+        <div class="menu-links">
+            <a href="#" onclick="scrollToSection('bebidas')">Bebidas</a>
+            <a href="#" onclick="scrollToSection('bolos')">Bolos</a>
+            <a href="#" onclick="mostrarCarrinho()">Carrinho (<span id="cart-count">0</span>)</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <h1>Café Starbucks</h1>
+        <p>Faça seu pedido online </p>
+    </header>
+
+    <!-- Galeria de Imagens -->
+    <div class="galeria">
+        <img src="cafeharry.jpg" alt="Starbucks">
+        <img src="cafe1.jpg" alt="Starbucks">
+        <img src="cafe2.jpg" alt="Starbucks">
+        <img src="973de791f51f5729ece27659a7abc02a.jpg" alt="Starbucks">
+    </div>
+
+    <section id="bebidas" class="secao">
+        <h2 class="titulo-secao">Bebidas Especiais</h2>
+        
+        <div class="produto">
+            <h3>Honeydukes Bursting Bonbons Frappuccino <span class="preco">R$ 25,00</span></h3>
+            <p>Edição limitada Harry Potter • Cremosa roxa com toppings mágicos</p>
+            <button onclick="adicionarAoCarrinho('Honeydukes Bursting Bonbons Frappuccino', 25.00)" class="btn-adicionar">🛒 Adicionar</button>
+        </div>
+
+        <div class="produto">
+            <h3>Blueberry Crème Frappuccino <span class="preco">R$ 22,50</span></h3>
+            <p>Cremoso com lavanda, baunilha e chantilly</p>
+            <button onclick="adicionarAoCarrinho('Blueberry Crème Frappuccino', 22.50)" class="btn-adicionar">🛒 Adicionar</button>
+        </div>
+
+        <div class="produto">
+            <h3>Berry Crème Frappuccino <span class="preco">R$ 22,00</span></h3>
+            <p>Com berries frescas e sabor floral</p>
+            <button onclick="adicionarAoCarrinho('Berry Crème Frappuccino', 22.00)" class="btn-adicionar">🛒 Adicionar</button>
+        </div>
+
+        <div class="produto">
+            <h3>Triple Berry Frappuccino <span class="preco">R$ 23,00</span></h3>
+            <p>Purê de frutas vermelhas + chantilly</p>
+            <button onclick="adicionarAoCarrinho('Triple Berry Frappuccino', 23.00)" class="btn-adicionar">🛒 Adicionar</button>
+        </div>
+    </section>
+
+    <section id="bolos" class="secao">
+        <h2 class="titulo-secao">Bolos & Doces</h2>
+        
+        <div class="produto">
+            <h3>Muffin de Blueberry <span class="preco">R$ 12,90</span></h3>
+            <p>Macio com mirtilos e cobertura crocante</p>
+            <button onclick="adicionarAoCarrinho('Muffin de Blueberry', 12.90)" class="btn-adicionar">🛒 Adicionar</button>
+        </div>
+    </section>
+
+    <!-- Modal do Carrinho -->
+    <div id="modal-carrinho" class="modal">
+        <div class="modal-content">
+            <h2>🛒 Seu Carrinho</h2>
+            <div id="itens-carrinho"></div>
+            <h3>Total: R$ <span id="total-preco">0.00</span></h3>
+            <div class="modal-buttons">
+                <button onclick="fecharCarrinho()" class="btn-fechar">Fechar</button>
+                <button onclick="finalizarPedido()" class="btn-finalizar">Finalizar Pedido</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- WhatsApp Fixo -->
+    <a href="https://wa.me/5542998194925?text=Olá!%20Quero%20fazer%20um%20pedido" target="_blank" class="btn-whatsapp">
+        📱 Pedir pelo WhatsApp
+    </a>
+
+    <footer>
+        <p>© 2026 Café Starbucks Roxo • Todos os direitos reservados</p>
+        <p>Feito com muito profissionalismo</p>
+    </footer>
+
+    <script>
+        let carrinho = [];
+
+        function adicionarAoCarrinho(nome, preco) {
+            carrinho.push({nome, preco});
+            atualizarCarrinho();
+            
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.textContent = `${nome} adicionado! `;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 2000);
+        }
+
+        function atualizarCarrinho() {
+            document.getElementById('cart-count').textContent = carrinho.length;
+        }
+
+        function mostrarCarrinho() {
+            const modal = document.getElementById('modal-carrinho');
+            const itensDiv = document.getElementById('itens-carrinho');
+            let html = '';
+            let total = 0;
+
+            carrinho.forEach((item, index) => {
+                html += `
+                    <div class="item-carrinho">
+                        <span>${item.nome}</span>
+                        <span>R$ ${item.preco.toFixed(2)}</span>
+                        <button onclick="removerItem(${index})" class="btn-remover">X</button>
+                    </div>`;
+                total += item.preco;
+            });
+
+            itensDiv.innerHTML = html || '<p class="empty">Seu carrinho está vazio </p>';
+            document.getElementById('total-preco').textContent = total.toFixed(2);
+            modal.style.display = 'flex';
+        }
+
+        function removerItem(index) {
+            carrinho.splice(index, 1);
+            mostrarCarrinho();
+            atualizarCarrinho();
+        }
+
+        function fecharCarrinho() {
+            document.getElementById('modal-carrinho').style.display = 'none';
+        }
+
+        function finalizarPedido() {
+            if (carrinho.length === 0) return alert("Carrinho vazio!");
+            alert("✅ Pedido enviado com sucesso! Entraremos em contato pelo WhatsApp ");
+            carrinho = [];
+            fecharCarrinho();
+            atualizarCarrinho();
+        }
+
+        function scrollToSection(section) {
+            document.getElementById(section).scrollIntoView({ behavior: "smooth" });
+        }
+    </script>
+</body>
+</html>
